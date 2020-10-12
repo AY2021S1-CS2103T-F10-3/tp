@@ -1,12 +1,12 @@
 package seedu.fma.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.fma.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -18,29 +18,31 @@ import seedu.fma.model.AddressBook;
 import seedu.fma.model.Model;
 import seedu.fma.model.ReadOnlyAddressBook;
 import seedu.fma.model.ReadOnlyUserPrefs;
+import seedu.fma.model.exercise.Exercise;
 import seedu.fma.model.log.Log;
+import seedu.fma.model.util.Name;
 import seedu.fma.testutil.LogBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullLog_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_logAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingLogAdded modelStub = new ModelStubAcceptingLogAdded();
         Log validLog = new LogBuilder().build();
 
         CommandResult commandResult = new AddCommand(validLog).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validLog), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validLog), modelStub.personsAdded);
+        assertEquals(Collections.singletonList(validLog), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateLog_throwsCommandException() {
         Log validLog = new LogBuilder().build();
         AddCommand addCommand = new AddCommand(validLog);
         ModelStub modelStub = new ModelStubWithPerson(validLog);
@@ -48,30 +50,41 @@ public class AddCommandTest {
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_LOG, () -> addCommand.execute(modelStub));
     }
 
-    // TODO Edit function
-    /*@Test
+    @Test
     public void equals() {
-        Log alice = new LogBuilder().withName("Alice").build();
-        Log bob = new LogBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Exercise sitsUp = Exercise.find(new Name("Sit ups"));
+        Exercise flyingKicks = Exercise.find(new Name("Flying kicks"));
+
+
+        Log logSitsUp = new LogBuilder()
+                .withExercise(sitsUp)
+                .withComment("This is okay")
+                .withReps("13")
+                .build();
+        Log logFlyingKicks = new LogBuilder()
+                .withExercise(flyingKicks)
+                .withComment("This is not okay!")
+                .withReps("13")
+                .build();
+        AddCommand addSitUpCommand = new AddCommand(logSitsUp);
+        AddCommand addFlyingKicksCommand = new AddCommand(logFlyingKicks);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals( addSitUpCommand,  addSitUpCommand);
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addAliceCommandCopy = new AddCommand(logSitsUp);
+        assertEquals( addSitUpCommand, addAliceCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1,  addSitUpCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null,  addSitUpCommand);
 
         // different log -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }*/
+        assertNotEquals( addSitUpCommand, addFlyingKicksCommand);
+    }
 
     /**
      * A default model stub that have all of the methods failing.
@@ -169,7 +182,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the log being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingLogAdded extends ModelStub {
         final ArrayList<Log> personsAdded = new ArrayList<>();
 
         @Override

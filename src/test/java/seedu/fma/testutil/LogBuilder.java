@@ -6,6 +6,7 @@ import seedu.fma.model.exercise.Exercise;
 import seedu.fma.model.log.Comment;
 import seedu.fma.model.log.Log;
 import seedu.fma.model.log.Rep;
+import seedu.fma.model.util.Name;
 
 /**
  * A utility class to help with building Log objects.
