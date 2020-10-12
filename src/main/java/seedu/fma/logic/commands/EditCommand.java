@@ -88,9 +88,9 @@ public class EditCommand extends Command {
         Exercise updatedExercise = editLogDescriptor.getExercise().orElse(logToEdit.getExercise());
         Rep updatedRep = editLogDescriptor.getRep().orElse(logToEdit.getReps());
         Comment updatedComment = editLogDescriptor.getComment().orElse(logToEdit.getComment());
+        LocalDateTime updatedLocalDatetime = editLogDescriptor.getDateTime().orElse(logToEdit.getDateTime());
 
-
-        return new Log(updatedExercise, updatedRep, updatedComment);
+        return new Log(updatedExercise, updatedRep, updatedComment, updatedLocalDatetime);
     }
 
     @Override

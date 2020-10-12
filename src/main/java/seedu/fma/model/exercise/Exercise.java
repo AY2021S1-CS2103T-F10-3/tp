@@ -70,13 +70,16 @@ public class Exercise {
             return true;
         }
 
+        if (other == null) {
+            return false;
+        }
+
         if (!(other instanceof Exercise)) {
             return false;
         }
 
         Exercise otherExercise = (Exercise) other;
-        return otherExercise != null
-                && otherExercise.getName().equals(getName());
+        return otherExercise.getName().equals(getName());
     }
 
     @Override

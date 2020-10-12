@@ -1,58 +1,48 @@
-//package seedu.address.logic.commands;
-//
-//import static org.junit.jupiter.api.Assertions.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-//import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import seedu.address.logic.commands.EditCommand.EditLogDescriptor;
-//import seedu.address.testutil.EditPersonDescriptorBuilder;
-//
-//public class EditLogDescriptorTest {
-//
-////    @Test
-////    public void equals() {
-////        // same values -> returns true
-////        EditLogDescriptor descriptorWithSameValues = new EditLogDescriptor(DESC_AMY);
-////        assertTrue(DESC_AMY.equals(descriptorWithSameValues));
-////
-////        // same object -> returns true
-////        assertTrue(DESC_AMY.equals(DESC_AMY));
-////
-////        // null -> returns false
-////        assertFalse(DESC_AMY.equals(null));
-////
-////        // different types -> returns false
-////        assertFalse(DESC_AMY.equals(5));
-////
-////        // different values -> returns false
-////        assertFalse(DESC_AMY.equals(DESC_BOB));
-////
-////        // different name -> returns false
-////        EditLogDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
-////        assertFalse(DESC_AMY.equals(editedAmy));
-////
-////        // different phone -> returns false
-////        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
-////        assertFalse(DESC_AMY.equals(editedAmy));
-////
-////        // different email -> returns false
-////        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
-////        assertFalse(DESC_AMY.equals(editedAmy));
-////
-////        // different address -> returns false
-////        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
-////        assertFalse(DESC_AMY.equals(editedAmy));
-////
-////        // different tags -> returns false
-////        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-////        assertFalse(DESC_AMY.equals(editedAmy));
-////    }
-//}
+package seedu.fma.logic.commands;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.fma.logic.commands.CommandTestUtil.*;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.fma.logic.commands.EditCommand.EditLogDescriptor;
+import seedu.fma.testutil.EditLogDescriptorBuilder;
+
+public class EditLogDescriptorTest {
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        EditLogDescriptor descriptorWithSameValues = new EditLogDescriptor(EDIT_LOG_DESCRIPTOR_A);
+        assertEquals(EDIT_LOG_DESCRIPTOR_A, descriptorWithSameValues);
+
+        // same object -> returns true
+        assertEquals(EDIT_LOG_DESCRIPTOR_A, EDIT_LOG_DESCRIPTOR_A);
+
+        // null -> returns false
+        assertNotEquals(null, EDIT_LOG_DESCRIPTOR_A);
+
+        // different types -> returns false
+        assertNotEquals(5, EDIT_LOG_DESCRIPTOR_A);
+
+        // different values -> returns false
+        assertNotEquals(EDIT_LOG_DESCRIPTOR_A, EDIT_LOG_DESCRIPTOR_B);
+
+        // different name -> returns false
+        EditLogDescriptor editedAmy = new EditLogDescriptorBuilder(EDIT_LOG_DESCRIPTOR_A)
+                .withExercise(VALID_EXERCISE_B).build();
+        assertNotEquals(EDIT_LOG_DESCRIPTOR_A, editedAmy);
+
+        // different phone -> returns false
+        editedAmy = new EditLogDescriptorBuilder(EDIT_LOG_DESCRIPTOR_A).withExercise(VALID_EXERCISE_B).build();
+        assertNotEquals(EDIT_LOG_DESCRIPTOR_A, editedAmy);
+
+        // different email -> returns false
+        editedAmy = new EditLogDescriptorBuilder(EDIT_LOG_DESCRIPTOR_A).withReps(VALID_REP_B).build();
+        assertNotEquals(EDIT_LOG_DESCRIPTOR_A, editedAmy);
+
+        // different address -> returns false
+        editedAmy = new EditLogDescriptorBuilder(EDIT_LOG_DESCRIPTOR_A).withComment(VALID_COMMENT_B).build();
+        assertNotEquals(EDIT_LOG_DESCRIPTOR_A, editedAmy);
+    }
+}
