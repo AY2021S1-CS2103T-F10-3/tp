@@ -21,7 +21,7 @@
 //
 //public class UniqueLogListTest {
 //
-////    private final UniquePersonList uniquePersonList = new UniquePersonList();
+////    private final UniqueLogList uniquePersonList = new UniqueLogList();
 ////
 ////    @Test
 ////    public void contains_nullPerson_throwsNullPointerException() {
@@ -77,7 +77,7 @@
 ////    public void setPerson_editedPersonIsSamePerson_success() {
 ////        uniquePersonList.add(ALICE);
 ////        uniquePersonList.setPerson(ALICE, ALICE);
-////        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+////        UniqueLogList expectedUniquePersonList = new UniqueLogList();
 ////        expectedUniquePersonList.add(ALICE);
 ////        assertEquals(expectedUniquePersonList, uniquePersonList);
 ////    }
@@ -88,7 +88,7 @@
 ////        Log editedAlice = new LogBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
 ////                .build();
 ////        uniquePersonList.setPerson(ALICE, editedAlice);
-////        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+////        UniqueLogList expectedUniquePersonList = new UniqueLogList();
 ////        expectedUniquePersonList.add(editedAlice);
 ////        assertEquals(expectedUniquePersonList, uniquePersonList);
 ////    }
@@ -97,7 +97,7 @@
 ////    public void setPerson_editedPersonHasDifferentIdentity_success() {
 ////        uniquePersonList.add(ALICE);
 ////        uniquePersonList.setPerson(ALICE, BOB);
-////        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+////        UniqueLogList expectedUniquePersonList = new UniqueLogList();
 ////        expectedUniquePersonList.add(BOB);
 ////        assertEquals(expectedUniquePersonList, uniquePersonList);
 ////    }
@@ -123,19 +123,19 @@
 ////    public void remove_existingPerson_removesPerson() {
 ////        uniquePersonList.add(ALICE);
 ////        uniquePersonList.remove(ALICE);
-////        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+////        UniqueLogList expectedUniquePersonList = new UniqueLogList();
 ////        assertEquals(expectedUniquePersonList, uniquePersonList);
 ////    }
 ////
 ////    @Test
 ////    public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-////        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniquePersonList) null));
+////        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniqueLogList) null));
 ////    }
 ////
 ////    @Test
 ////    public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
 ////        uniquePersonList.add(ALICE);
-////        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+////        UniqueLogList expectedUniquePersonList = new UniqueLogList();
 ////        expectedUniquePersonList.add(BOB);
 ////        uniquePersonList.setPersons(expectedUniquePersonList);
 ////        assertEquals(expectedUniquePersonList, uniquePersonList);
@@ -151,7 +151,7 @@
 ////        uniquePersonList.add(ALICE);
 ////        List<Log> logList = Collections.singletonList(BOB);
 ////        uniquePersonList.setPersons(logList);
-////        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+////        UniqueLogList expectedUniquePersonList = new UniqueLogList();
 ////        expectedUniquePersonList.add(BOB);
 ////        assertEquals(expectedUniquePersonList, uniquePersonList);
 ////    }

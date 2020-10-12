@@ -5,10 +5,13 @@ import static seedu.fma.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.fma.logic.parser.CliSyntax.PREFIX_EXERCISE;
 import static seedu.fma.logic.parser.CliSyntax.PREFIX_REPS;
 import static seedu.fma.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.fma.commons.core.index.Index;
 import seedu.fma.logic.commands.exceptions.CommandException;
@@ -16,6 +19,7 @@ import seedu.fma.model.AddressBook;
 import seedu.fma.model.Model;
 import seedu.fma.model.exercise.Exercise;
 import seedu.fma.model.log.Log;
+import seedu.fma.model.util.NameContainsKeywordsPredicate;
 import seedu.fma.testutil.ExerciseBuilder;
 import seedu.fma.testutil.LogBuilder;
 
@@ -123,13 +127,12 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the log at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        /*assertTrue(targetIndex.getZeroBased() < model.getFilteredLogList().size());
+    public static void showLogAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredLogList().size());
 
         Log log = model.getFilteredLogList().get(targetIndex.getZeroBased());
-        final String[] splitName = log.getName().value.split("\\s+");
-        model.updateFilteredLogList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredLogList().size());*/
+        Predicate<Log> firstPredicate = new NameContainsKeywordsPredicate(Collections.singletonList(log.toString()));
+        model.updateFilteredLogList(firstPredicate);
+        assertEquals(1, model.getFilteredLogList().size());
     }
 }

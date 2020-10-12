@@ -19,7 +19,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Log> {
     @Override
     public boolean test(Log log) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(log.toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordsIgnoreCases(log.toString(), keyword));
     }
 
     @Override

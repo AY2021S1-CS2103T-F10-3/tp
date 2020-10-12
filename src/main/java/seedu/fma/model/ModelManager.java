@@ -37,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         // TODO: Sorting order is currently hardcoded
-        SortedList<Log> sortedLogs = new SortedList<>(this.addressBook.getPersonList(),
+        SortedList<Log> sortedLogs = new SortedList<>(this.addressBook.getLogList(),
                 Comparator.comparing(Log::getDateTime).reversed());
         filteredLogs = new FilteredList<>(sortedLogs);
     }
@@ -96,17 +96,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasLog(Log log) {
         requireNonNull(log);
-        return addressBook.hasPerson(log);
+        return addressBook.hasLog(log);
     }
 
     @Override
     public void deleteLog(Log target) {
-        addressBook.removePerson(target);
+        addressBook.removeLog(target);
     }
 
     @Override
     public void addLog(Log log) {
-        addressBook.addPerson(log);
+        addressBook.addLog(log);
         updateFilteredLogList(PREDICATE_SHOW_ALL_LOGS);
     }
 
@@ -114,7 +114,7 @@ public class ModelManager implements Model {
     public void setLog(Log target, Log editedLog) {
         requireAllNonNull(target, editedLog);
 
-        addressBook.setPerson(target, editedLog);
+        addressBook.setLog(target, editedLog);
     }
 
     //=========== Filtered Log List Accessors =============================================================
@@ -131,6 +131,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLogList(Predicate<Log> predicate) {
         requireNonNull(predicate);
+        System.out.println("WTF");
         filteredLogs.setPredicate(predicate);
     }
 

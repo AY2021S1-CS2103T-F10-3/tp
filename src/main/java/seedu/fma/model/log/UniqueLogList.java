@@ -12,17 +12,17 @@ import seedu.fma.model.log.exceptions.DuplicateLogException;
 import seedu.fma.model.log.exceptions.LogNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of logs that enforces uniqueness between its elements and does not allow nulls.
  * A log is considered unique by comparing using {@code Log#isSameLog(Log)}. As such, adding and updating of
- * persons uses Log#isSameLog(Log) for equality so as to ensure that the log being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a log uses Log#equals(Object) so
+ * logs uses Log#isSameLog(Log) for equality so as to ensure that the log being added or updated is
+ * unique in terms of identity in the UniqueLogList. However, the removal of a log uses Log#equals(Object) so
  * as to ensure that the log with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Log#isSameLog(Log)
  */
-public class UniquePersonList implements Iterable<Log> {
+public class UniqueLogList implements Iterable<Log> {
 
     private final ObservableList<Log> internalList = FXCollections.observableArrayList();
     private final ObservableList<Log> internalUnmodifiableList =
@@ -53,7 +53,7 @@ public class UniquePersonList implements Iterable<Log> {
      * {@code target} must exist in the list.
      * The log identity of {@code editedLog} must not be the same as another existing log in the list.
      */
-    public void setPerson(Log target, Log editedLog) {
+    public void setLog(Log target, Log editedLog) {
         requireAllNonNull(target, editedLog);
 
         int index = internalList.indexOf(target);
@@ -79,7 +79,7 @@ public class UniquePersonList implements Iterable<Log> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueLogList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -90,7 +90,7 @@ public class UniquePersonList implements Iterable<Log> {
      */
     public void setPersons(List<Log> logs) {
         requireAllNonNull(logs);
-        if (!personsAreUnique(logs)) {
+        if (!logsAreUnique(logs)) {
             throw new DuplicateLogException();
         }
 
@@ -112,8 +112,8 @@ public class UniquePersonList implements Iterable<Log> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueLogList // instanceof handles nulls
+                        && internalList.equals(((UniqueLogList) other).internalList));
     }
 
     @Override
@@ -124,7 +124,7 @@ public class UniquePersonList implements Iterable<Log> {
     /**
      * Returns true if {@code logs} contains only unique logs.
      */
-    private boolean personsAreUnique(List<Log> logs) {
+    private boolean logsAreUnique(List<Log> logs) {
         for (int i = 0; i < logs.size() - 1; i++) {
             for (int j = i + 1; j < logs.size(); j++) {
                 if (logs.get(i).isSameLog(logs.get(j))) {

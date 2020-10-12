@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Log: %1$s";
+    public static final String MESSAGE_DELETE_LOG_SUCCESS = "Deleted Log: %1$s";
 
     private final Index targetIndex;
 
@@ -36,12 +36,12 @@ public class DeleteCommand extends Command {
         List<Log> lastShownList = model.getFilteredLogList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_LOG_DISPLAYED_INDEX);
         }
 
         Log logToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteLog(logToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, logToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_LOG_SUCCESS, logToDelete));
     }
 
     @Override

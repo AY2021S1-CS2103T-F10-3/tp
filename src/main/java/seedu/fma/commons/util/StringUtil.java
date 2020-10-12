@@ -39,6 +39,21 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code words}.
+     * @param sentence cannot be null
+     * @param words cannot be null, cannot be empty, can be an array of words
+     */
+    public static boolean containsWordsIgnoreCases(String sentence, String words) {
+        requireNonNull(sentence);
+        requireNonNull(words);
+
+        String preppedWord = words.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+
+        return sentence.contains(words);
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {

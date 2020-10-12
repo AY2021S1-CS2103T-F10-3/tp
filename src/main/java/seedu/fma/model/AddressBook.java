@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.fma.model.log.Log;
-import seedu.fma.model.log.UniquePersonList;
+import seedu.fma.model.log.UniqueLogList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +14,7 @@ import seedu.fma.model.log.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueLogList logs;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        logs = new UniqueLogList();
     }
 
     public AddressBook() {}
@@ -43,8 +43,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the log list with {@code logs}.
      * {@code logs} must not contain duplicate logs.
      */
-    public void setPersons(List<Log> logs) {
-        this.persons.setPersons(logs);
+    public void setLogs(List<Log> logs) {
+        this.logs.setPersons(logs);
     }
 
     /**
@@ -53,7 +53,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setLogs(newData.getLogList());
     }
 
     //// log-level operations
@@ -61,17 +61,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a log with the same identity as {@code log} exists in the address book.
      */
-    public boolean hasPerson(Log log) {
+    public boolean hasLog(Log log) {
         requireNonNull(log);
-        return persons.contains(log);
+        return logs.contains(log);
     }
 
     /**
      * Adds a log to the address book.
      * The log must not already exist in the address book.
      */
-    public void addPerson(Log p) {
-        persons.add(p);
+    public void addLog(Log p) {
+        logs.add(p);
     }
 
     /**
@@ -79,42 +79,42 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The log identity of {@code editedLog} must not be the same as another existing log in the address book.
      */
-    public void setPerson(Log target, Log editedLog) {
+    public void setLog(Log target, Log editedLog) {
         requireNonNull(editedLog);
 
-        persons.setPerson(target, editedLog);
+        logs.setLog(target, editedLog);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Log key) {
-        persons.remove(key);
+    public void removeLog(Log key) {
+        logs.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return logs.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Log> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Log> getLogList() {
+        return logs.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && logs.equals(((AddressBook) other).logs));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return logs.hashCode();
     }
 }

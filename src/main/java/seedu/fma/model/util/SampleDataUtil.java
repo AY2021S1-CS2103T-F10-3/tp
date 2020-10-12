@@ -34,7 +34,7 @@ public class SampleDataUtil {
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Log sampleLog : getSamplePersons()) {
-            sampleAb.addPerson(sampleLog);
+            sampleAb.addLog(sampleLog);
         }
         return sampleAb;
     }

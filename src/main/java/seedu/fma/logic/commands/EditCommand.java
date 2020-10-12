@@ -63,7 +63,7 @@ public class EditCommand extends Command {
         List<Log> lastShownList = model.getFilteredLogList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_LOG_DISPLAYED_INDEX);
         }
 
         Log logToEdit = lastShownList.get(index.getZeroBased());

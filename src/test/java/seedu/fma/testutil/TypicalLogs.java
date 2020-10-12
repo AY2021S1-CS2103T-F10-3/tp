@@ -68,7 +68,7 @@ public class TypicalLogs {
     public static AddressBook getTypicalLogBook() {
         AddressBook ab = new AddressBook();
         for (Log log : getTypicalLogs()) {
-            ab.addPerson(log);
+            ab.addLog(log);
         }
         return ab;
     }
